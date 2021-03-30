@@ -43,8 +43,20 @@ class ScaryCreatureDoc: NSObject {
   private var _data: ScaryCreatureData?
   var data: ScaryCreatureData? {
     get {
+      // 1
+      if _data != nil { return _data }
+      
+      // 2
+      let dataURL = docPath!.appendingPathComponent(Keys.dataFile.rawValue)
+      guard let codedData = try? Data(contentsOf: dataURL) else { return nil }
+      
+      // 3
+      _data = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(codedData) as?
+          ScaryCreatureData
+      
       return _data
     }
+
     set {
       _data = newValue
     }
