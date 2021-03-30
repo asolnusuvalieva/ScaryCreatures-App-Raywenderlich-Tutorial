@@ -103,6 +103,7 @@ class ScaryCreatureDoc: NSObject {
     self.fullImage = fullImage
     
     saveData()
+    saveImages()
   }
   
   var docPath: URL?
@@ -156,5 +157,30 @@ class ScaryCreatureDoc: NSObject {
         print("Error Deleting Folder. " + error.localizedDescription)
       }
     }
+  }
+  
+  func saveImages() {
+    // 1
+    if _fullImage == nil || _thumbImage == nil { return }
+    
+    // 2
+    do {
+      try createDataPath()
+    } catch {
+      print("Couldn't create save Folder. " + error.localizedDescription)
+      return
+    }
+    
+    // 3
+    let thumbImageURL = docPath!.appendingPathComponent(Keys.thumbImageFile.rawValue)
+    let fullImageURL = docPath!.appendingPathComponent(Keys.fullImageFile.rawValue)
+    
+    // 4
+    let thumbImageData = _thumbImage!.pngData()
+    let fullImageData = _fullImage!.pngData()
+    
+    // 5
+    try! thumbImageData!.write(to: thumbImageURL)
+    try! fullImageData!.write(to: fullImageURL)
   }
 }

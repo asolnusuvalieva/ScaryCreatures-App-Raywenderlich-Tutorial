@@ -111,6 +111,8 @@ extension DetailViewController: UIImagePickerControllerDelegate, UINavigationCon
         self.imageView.image = fullImage
       }
     }
+    self.detailItem?.saveImages()
+
     dismiss(animated: true, completion: nil)
   }
 }
