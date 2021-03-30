@@ -27,8 +27,19 @@
 /// THE SOFTWARE.
 
 import UIKit
-
+/*
+ ScaryCreatureDoc contains:
+  Title & Rating
+  ThumbImage
+  Full Image
+ */
 class ScaryCreatureDoc: NSObject {
+  enum Keys: String {
+    case dataFile = "Data.plist"
+    case thumbImageFile = "thumbImage.png"
+    case fullImageFile = "fullImage.png"
+  }
+
   private var _data: ScaryCreatureData?
   var data: ScaryCreatureData? {
     get {
@@ -42,8 +53,15 @@ class ScaryCreatureDoc: NSObject {
   private var _thumbImage: UIImage?
   var thumbImage: UIImage? {
     get {
-       return _thumbImage
+      if _thumbImage != nil { return _thumbImage }
+      if docPath == nil { return nil }
+
+      let thumbImageURL = docPath!.appendingPathComponent(Keys.thumbImageFile.rawValue)
+      guard let imageData = try? Data(contentsOf: thumbImageURL) else { return nil }
+      _thumbImage = UIImage(data: imageData)
+      return _thumbImage
     }
+
     set {
       _thumbImage = newValue
     }
@@ -52,8 +70,15 @@ class ScaryCreatureDoc: NSObject {
   private var _fullImage: UIImage?
   var fullImage: UIImage? {
     get {
-       return _fullImage
+      if _fullImage != nil { return _fullImage }
+      if docPath == nil { return nil }
+      
+      let fullImageURL = docPath!.appendingPathComponent(Keys.fullImageFile.rawValue)
+      guard let imageData = try? Data(contentsOf: fullImageURL) else { return nil }
+      _fullImage = UIImage(data: imageData)
+      return _fullImage
     }
+
     set {
       _fullImage = newValue
     }
@@ -64,5 +89,12 @@ class ScaryCreatureDoc: NSObject {
     _data = ScaryCreatureData(title: title, rating: rating)
     self.thumbImage = thumbImage
     self.fullImage = fullImage
+  }
+  
+  var docPath: URL?
+    
+  init(docPath: URL) {
+    super.init()
+    self.docPath = docPath
   }
 }
