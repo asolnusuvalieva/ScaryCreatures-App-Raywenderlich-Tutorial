@@ -89,6 +89,8 @@ class ScaryCreatureDoc: NSObject {
     _data = ScaryCreatureData(title: title, rating: rating)
     self.thumbImage = thumbImage
     self.fullImage = fullImage
+    
+    saveData()
   }
   
   var docPath: URL?
@@ -105,6 +107,33 @@ class ScaryCreatureDoc: NSObject {
     try FileManager.default.createDirectory(at: docPath!,
                                             withIntermediateDirectories: true,
                                             attributes: nil)
+  }
+
+  func saveData() {
+    // 1
+    guard let data = data else { return }
+      
+    // 2
+    do {
+      try createDataPath()
+    } catch {
+      print("Couldn't create save folder. " + error.localizedDescription)
+      return
+    }
+      
+    // 3
+    let dataURL = docPath!.appendingPathComponent(Keys.dataFile.rawValue)
+      
+    // 4
+    let codedData = try! NSKeyedArchiver.archivedData(withRootObject: data,
+                                                      requiringSecureCoding: false)
+      
+    // 5
+    do {
+      try codedData.write(to: dataURL)
+    } catch {
+      print("Couldn't write to save file: " + error.localizedDescription)
+    }
   }
 
 }
