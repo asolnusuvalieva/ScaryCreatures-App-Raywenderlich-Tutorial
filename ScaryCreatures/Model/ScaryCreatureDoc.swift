@@ -147,5 +147,14 @@ class ScaryCreatureDoc: NSObject {
       print("Couldn't write to save file: " + error.localizedDescription)
     }
   }
-
+  
+  func deleteDoc() {
+    if let docPath = docPath {
+      do {
+        try FileManager.default.removeItem(at: docPath)
+      }catch {
+        print("Error Deleting Folder. " + error.localizedDescription)
+      }
+    }
+  }
 }
