@@ -97,4 +97,14 @@ class ScaryCreatureDoc: NSObject {
     super.init()
     self.docPath = docPath
   }
+  
+  func createDataPath() throws {
+    guard docPath == nil else { return }
+
+    docPath = ScaryCreatureDatabase.nextScaryCreatureDocPath()
+    try FileManager.default.createDirectory(at: docPath!,
+                                            withIntermediateDirectories: true,
+                                            attributes: nil)
+  }
+
 }
