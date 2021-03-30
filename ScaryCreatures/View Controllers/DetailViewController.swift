@@ -78,6 +78,7 @@ class DetailViewController: UIViewController {
   
   @IBAction func titleFieldTextChanged(_ sender: UITextField) {
     detailItem?.data?.title = sender.text!
+    detailItem?.saveData()
   }
 }
 
@@ -86,6 +87,7 @@ class DetailViewController: UIViewController {
 extension DetailViewController: RateViewDelegate {
   func rateViewRatingDidChange(rateView: RateView, newRating: Float) {
     detailItem?.data?.rating = newRating
+    detailItem?.saveData()
   }
 }
 

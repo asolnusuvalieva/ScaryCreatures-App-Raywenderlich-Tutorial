@@ -28,7 +28,61 @@
 
 import Foundation
 class ScaryCreatureDatabase: NSObject {
+  static let privateDocsDir: URL = {
+    // 1
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    
+    // 2
+    let documentsDirectoryURL = paths.first!.appendingPathComponent("PrivateDocuments")
+    
+    // 3
+    do {
+      try FileManager.default.createDirectory(at: documentsDirectoryURL,
+                                              withIntermediateDirectories: true,
+                                              attributes: nil)
+    } catch {
+      print("Couldn't create directory")
+    }
+    
+    print(documentsDirectoryURL.absoluteString)
+    
+    return documentsDirectoryURL
+  }()
+
+  
   class func nextScaryCreatureDocPath() -> URL? {
-    return nil
+    // 1
+    guard let files = try? FileManager.default.contentsOfDirectory(
+      at: privateDocsDir,
+      includingPropertiesForKeys: nil,
+      options: .skipsHiddenFiles) else { return nil }
+
+    var maxNumber = 0
+
+    // 2
+    files.forEach {
+      if $0.pathExtension == "scarycreature" {
+        let fileName = $0.deletingPathExtension().lastPathComponent
+        maxNumber = max(maxNumber, Int(fileName) ?? 0)
+      }
+    }
+
+    // 3
+    return privateDocsDir.appendingPathComponent(
+      "\(maxNumber + 1).scarycreature",
+      isDirectory: true)
+
+  }
+  
+  class func loadScaryCreatureDocs() -> [ScaryCreatureDoc] {
+    // 1
+    guard let files = try? FileManager.default.contentsOfDirectory(
+      at: privateDocsDir,
+      includingPropertiesForKeys: nil,
+      options: .skipsHiddenFiles) else { return [] }
+    
+    return files
+      .filter { $0.pathExtension == "scarycreature" } // 2
+      .map { ScaryCreatureDoc(docPath: $0) } // 3
   }
 }
