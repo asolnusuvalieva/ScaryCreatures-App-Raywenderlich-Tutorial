@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EE223ED626133BD60056746D /* ScaryCreatureDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE223ED526133BD60056746D /* ScaryCreatureDatabase.swift */; };
 		F5431BA12107D19B00A99F47 /* ScaryCreatureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5431BA02107D19B00A99F47 /* ScaryCreatureData.swift */; };
 		F5431BA32107D1AB00A99F47 /* ScaryCreatureDoc.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5431BA22107D1AB00A99F47 /* ScaryCreatureDoc.swift */; };
+		F56E58CF21093B830065ACD9 /* ScaryCreatureDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E58CE21093B830065ACD9 /* ScaryCreatureDatabase.swift */; };
 		F595E01C2106393D005D833E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F595E01B2106393D005D833E /* Extensions.swift */; };
 		F595E03021064AAD005D833E /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F595E02F21064AAD005D833E /* RateView.swift */; };
 		F5AFC84D2106323900EF088D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFC84C2106323900EF088D /* AppDelegate.swift */; };
@@ -21,9 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EE223ED526133BD60056746D /* ScaryCreatureDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaryCreatureDatabase.swift; sourceTree = "<group>"; };
 		F5431BA02107D19B00A99F47 /* ScaryCreatureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaryCreatureData.swift; sourceTree = "<group>"; };
 		F5431BA22107D1AB00A99F47 /* ScaryCreatureDoc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaryCreatureDoc.swift; sourceTree = "<group>"; };
+		F56E58CE21093B830065ACD9 /* ScaryCreatureDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaryCreatureDatabase.swift; sourceTree = "<group>"; };
 		F595E01B2106393D005D833E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F595E02F21064AAD005D833E /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		F5AFC8492106323900EF088D /* ScaryCreatures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScaryCreatures.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,7 +52,7 @@
 			children = (
 				F5431BA02107D19B00A99F47 /* ScaryCreatureData.swift */,
 				F5431BA22107D1AB00A99F47 /* ScaryCreatureDoc.swift */,
-				EE223ED526133BD60056746D /* ScaryCreatureDatabase.swift */,
+				F56E58CE21093B830065ACD9 /* ScaryCreatureDatabase.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -179,12 +179,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE223ED626133BD60056746D /* ScaryCreatureDatabase.swift in Sources */,
 				F5AFC8512106323900EF088D /* DetailViewController.swift in Sources */,
 				F5AFC84F2106323900EF088D /* MasterViewController.swift in Sources */,
 				F595E03021064AAD005D833E /* RateView.swift in Sources */,
 				F5AFC84D2106323900EF088D /* AppDelegate.swift in Sources */,
 				F5431BA32107D1AB00A99F47 /* ScaryCreatureDoc.swift in Sources */,
+				F56E58CF21093B830065ACD9 /* ScaryCreatureDatabase.swift in Sources */,
 				F595E01C2106393D005D833E /* Extensions.swift in Sources */,
 				F5431BA12107D19B00A99F47 /* ScaryCreatureData.swift in Sources */,
 			);
@@ -269,7 +269,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ScaryBugs/ScaryBugs-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -324,7 +324,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ScaryBugs/ScaryBugs-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};

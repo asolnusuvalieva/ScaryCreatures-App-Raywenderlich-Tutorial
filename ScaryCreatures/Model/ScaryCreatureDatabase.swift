@@ -1,15 +1,15 @@
-/// Copyright (c) 2021 Razeware LLC
-/// 
+/// Copyright (c) 2018 Razeware LLC
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,6 +27,7 @@
 /// THE SOFTWARE.
 
 import Foundation
+
 class ScaryCreatureDatabase: NSObject {
   static let privateDocsDir: URL = {
     // 1
@@ -43,46 +44,31 @@ class ScaryCreatureDatabase: NSObject {
     } catch {
       print("Couldn't create directory")
     }
-    
-    print(documentsDirectoryURL.absoluteString)
-    
     return documentsDirectoryURL
   }()
 
-  
   class func nextScaryCreatureDocPath() -> URL? {
-    // 1
-    guard let files = try? FileManager.default.contentsOfDirectory(
-      at: privateDocsDir,
-      includingPropertiesForKeys: nil,
-      options: .skipsHiddenFiles) else { return nil }
-
+    // 1) Get all the files and folders within the database folder
+    guard let files = try? FileManager.default.contentsOfDirectory(at: privateDocsDir, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) else { return nil }
     var maxNumber = 0
-
-    // 2
+    
+    // 2) Get the highest numbered item saved within the database
     files.forEach {
       if $0.pathExtension == "scarycreature" {
         let fileName = $0.deletingPathExtension().lastPathComponent
         maxNumber = max(maxNumber, Int(fileName) ?? 0)
       }
     }
-
-    // 3
-    return privateDocsDir.appendingPathComponent(
-      "\(maxNumber + 1).scarycreature",
-      isDirectory: true)
-
+    
+    // 3) Return a path with the consecutive number
+    return privateDocsDir.appendingPathComponent("\(maxNumber + 1).scarycreature", isDirectory: true)
   }
   
   class func loadScaryCreatureDocs() -> [ScaryCreatureDoc] {
-    // 1
-    guard let files = try? FileManager.default.contentsOfDirectory(
-      at: privateDocsDir,
-      includingPropertiesForKeys: nil,
-      options: .skipsHiddenFiles) else { return [] }
+    guard let files = try? FileManager.default.contentsOfDirectory(at: privateDocsDir, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) else { return [] }
     
     return files
-      .filter { $0.pathExtension == "scarycreature" } // 2
-      .map { ScaryCreatureDoc(docPath: $0) } // 3
+      .filter { $0.pathExtension == "scarycreature" }
+      .map { ScaryCreatureDoc(docPath: $0) }
   }
 }

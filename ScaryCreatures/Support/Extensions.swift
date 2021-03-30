@@ -28,7 +28,7 @@
 
 import UIKit
 
-extension UIImage{
+extension UIImage {
   func resized(newSize: CGSize) -> UIImage {
     let horizontalRatio = newSize.width / size.width
     let verticalRatio = newSize.height / size.height
